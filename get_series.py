@@ -51,6 +51,22 @@ def write_latest_episodes(file_index):
 			f=open(files[i],'w')
 			f.write(latest_episodes[file_index])
 			f.close()
+	if file_index == 0:
+		lat0.config(bg='orange')
+	elif file_index == 1:
+		lat1.config(bg='orange')
+	elif file_index == 2:
+		lat2.config(bg='orange')
+	elif file_index == 3:
+		lat3.config(bg='orange')
+	elif file_index == 4:
+		lat4.config(bg='orange')
+	else:
+		lat0.config(bg='orange')
+		lat1.config(bg='orange')
+		lat2.config(bg='orange')
+		lat3.config(bg='orange')
+		lat4.config(bg='orange')
 
 
 if __name__ == '__main__':
