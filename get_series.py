@@ -72,7 +72,7 @@ def write_latest_episodes(file_index):
 if __name__ == '__main__':
 	page_himym = "http://www.watchseries.to/serie/how_i_met_your_mother"
 	page_arrow = "http://www.watchseries.to/serie/arrow"
-	page_shield = "http://www.watchseries.to/serie/marvels_agents_of_s_h_i_e_l_d"
+	page_shield = "http://www.watchseries.to/serie/Agents_of_S_H_I_E_L_D"
 	page_bbt = "http://www.watchseries.to/serie/big_bang_theory"
 	page_atlantis = "http://www.watchseries.to/serie/atlantis_2013"
 	#list of all urls
