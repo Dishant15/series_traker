@@ -1,6 +1,7 @@
 import urllib2
 import zlib
 from Tkinter import *
+import webbrowser as wb
 
 no_of_series = 8
 current_episodes = ["","","","","","","",""] # arrow , Shield , bbt , atlantis , GOT , Svally , Davinci
@@ -95,20 +96,28 @@ def write_latest_episodes(file_index):
 			f.close()
 	if file_index == 0:
 		lat0.config(bg='orange')
+		wb.open('http://kickass.to/arrow-tv30715/')
 	elif file_index == 1:
 		lat1.config(bg='orange')
+		wb.open('http://kickass.to/marvel-s-agents-of-s-h-i-e-l-d-tv32656/')
 	elif file_index == 2:
 		lat2.config(bg='orange')
+		wb.open('http://kickass.to/the-big-bang-theory-tv8511/')
 	elif file_index == 3:
 		lat3.config(bg='orange')
+		wb.open('http://kickass.to/atlantis-2013-tv36869/')
 	elif file_index == 4:
 		lat4.config(bg='orange')
+		wb.open('http://kickass.to/game-of-thrones-tv24493/')
 	elif file_index == 5:
 		lat5.config(bg='orange')
+		wb.open('http://kickass.to/the-walking-dead-tv25056/')
 	elif file_index == 6:
 		lat6.config(bg='orange')
+		wb.open('http://kickass.to/silicon-valley-tv33759/')
 	elif file_index == 7:
 		lat7.config(bg='orange')
+		wb.open('http://kickass.to/da-vinci-s-demons-tv32724/')
 	else:
 		lat0.config(bg='orange')
 		lat1.config(bg='orange')
@@ -235,7 +244,7 @@ if __name__ == '__main__':
 	bu8 = Button(buframe,text="DV's D +",command=lambda:write_latest_episodes(7))
 	bu8.pack(fill=X,expand=1)
 
-	root.geometry("1000x229+300+300")  #Set starting window size
+	root.geometry("1000x300+300+300")  #Set starting window size
 	root.mainloop()        #starts event loop of the program
 	#root.destroy()
 
