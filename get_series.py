@@ -2,10 +2,10 @@ import urllib2
 import zlib
 from Tkinter import *
 
-no_of_series = 6
-current_episodes = ["","","","","",""] # arrow , Shield , bbt , atlantis , himym
-latest_episodes = ["","","","","",""]
-files = ["arrow.txt","Shield.txt","bbt.txt","atlantis.txt","himym.txt","walkingdead.txt"]
+no_of_series = 8
+current_episodes = ["","","","","","","",""] # arrow , Shield , bbt , atlantis , GOT , Svally , Davinci
+latest_episodes = ["","","","","","","",""]
+files = ["arrow.txt","Shield.txt","bbt.txt","atlantis.txt","himym.txt","walkingdead.txt","svally.txt","davinci.txt"]
 
 def get_page_code(page):
 	"""
@@ -32,8 +32,7 @@ def get_latest_episodes(page):
 	latest_episode = ""
 	flag = 2
 	page_html = get_page_code(page)
-	page_html = page_html[page_html.find("showEpisodeInfo"):] #trim the input code
-	page_html = page_html[page_html.find("versionsEpNo"):]
+	page_html = page_html[page_html.find("<h3>Name:</h3>")+25:] #trim the input code
 	#get only name of latest episode
 	for char in page_html:
 		if char == "<":
@@ -42,26 +41,34 @@ def get_latest_episodes(page):
 			latest_episode = latest_episode + char
 		if char == ">":
 			flag = flag - 1
-	latest_episode = latest_episode + ": "
+
 	flag = 2
-	page_html = page_html[page_html.find("versionsEpName"):]
-	#get only name of latest episode
+	page_html = page_html[page_html.find("Episode:</div>")+15:]
+	#get only number of latest episode
+	num = ""
 	for char in page_html:
 		if char == "<":
 			break
 		if flag == 1:
-			latest_episode = latest_episode + char
+			num = num + char
 		if char == ">":
 			flag = flag - 1
-	return latest_episode
+	return num + ' ' + latest_episode
 
 def read_current_episodes():
 	"""
 	Reads From file and stores current episode data to list
 	"""
 	for i in range(no_of_series):
-		f=open(files[i],'r')
-		current_episodes[i]=f.readline().strip()
+		try:
+			#file exists
+			f=open(files[i],'r')
+			current_episodes[i]=f.readline().strip()
+		except Exception, e:
+			#file does not exist
+			f=open(files[i],'a')
+			f.write("New Season Tracking")
+			current_episodes[i] = "New Season Tracking"
 		f.close()
 
 def store_latest_episodes(urls):
@@ -84,7 +91,7 @@ def write_latest_episodes(file_index):
 	else:
 		for i in range(no_of_series):
 			f=open(files[i],'w')
-			f.write(latest_episodes[file_index])
+			f.write(latest_episodes[i])
 			f.close()
 	if file_index == 0:
 		lat0.config(bg='orange')
@@ -98,6 +105,10 @@ def write_latest_episodes(file_index):
 		lat4.config(bg='orange')
 	elif file_index == 5:
 		lat5.config(bg='orange')
+	elif file_index == 6:
+		lat6.config(bg='orange')
+	elif file_index == 7:
+		lat7.config(bg='orange')
 	else:
 		lat0.config(bg='orange')
 		lat1.config(bg='orange')
@@ -105,23 +116,26 @@ def write_latest_episodes(file_index):
 		lat3.config(bg='orange')
 		lat4.config(bg='orange')
 		lat5.config(bg='orange')
-
+		lat6.config(bg='orange')
+		lat7.config(bg='orange')
 
 if __name__ == '__main__':
-	page_himym = "http://kickass.to/how-i-met-your-mother-tv3918/"
-	page_arrow = "http://kickass.to/arrow-tv30715/"
-	page_shield = "http://kickass.to/marvel-s-agents-of-s-h-i-e-l-d-tv32656/"
-	page_bbt = "http://kickass.to/the-big-bang-theory-tv8511/"
-	page_atlantis = "http://kickass.to/atlantis-2013-tv36869/"
-	page_wd = "http://kickass.to/the-walking-dead-tv25056/"
+	page_got = "http://next-episode.net/game-of-thrones"   #Game of thrones
+	page_arrow = "http://next-episode.net/arrow"
+	page_shield = "http://next-episode.net/marvels-agents-of-s.h.i.e.l.d."
+	page_bbt = "http://next-episode.net/the-big-bang-theory"
+	page_atlantis = "http://next-episode.net/atlantis-2013"
+	page_wd = "http://next-episode.net/the-walking-dead"
+	page_svally = "http://next-episode.net/silicon-valley"
+	page_davinci = "http://next-episode.net/da-vincis-demons"
 	#list of all urls
-	page_urls = [page_arrow,page_shield,page_bbt,page_atlantis,page_himym,page_wd]
+	page_urls = [page_arrow,page_shield,page_bbt,page_atlantis,page_got,page_wd,page_svally,page_davinci]
 
 	read_current_episodes()           #get current episode list
 	store_latest_episodes(page_urls)  #get latest episode list
 
 	root = Tk()
-	root.title("Get Series")
+	root.title("Get Series Updates")
 
 	firstframe = Frame(root)
 	firstframe.pack()
@@ -136,23 +150,27 @@ if __name__ == '__main__':
 	buframe.pack(side=LEFT)
 
 	#populate title frame with titles
-	emptylable = Label(titleframe,text="",bg="aqua")
+	emptylable = Label(titleframe,text="",bg="green")
 	emptylable.pack(fill=X,expand=1)
-	arrowlable = Label(titleframe,text="Arrow :",bg="aqua")
+	arrowlable = Label(titleframe,text="Arrow :",bg="green")
 	arrowlable.pack(fill=X,expand=1)
-	shieldlable = Label(titleframe,text="S.H.I.E.L.D :",bg="aqua")
+	shieldlable = Label(titleframe,text="S.H.I.E.L.D :",bg="green")
 	shieldlable.pack(fill=X,expand=1)
-	bbtlable = Label(titleframe,text="Big Bang Theory :",bg="aqua")
+	bbtlable = Label(titleframe,text="Big Bang Theory :",bg="green")
 	bbtlable.pack(fill=X,expand=1)
-	atlantislable = Label(titleframe,text="Atlantis :",bg="aqua")
+	atlantislable = Label(titleframe,text="Atlantis :",bg="green")
 	atlantislable.pack(fill=X,expand=1)
-	himymlable = Label(titleframe,text="How I Met Your Mother :",bg="aqua")
+	himymlable = Label(titleframe,text="Game Of Thrones :",bg="green")
 	himymlable.pack(fill=X,expand=1)
-	wdlable = Label(titleframe,text="Walking Dead :",bg="aqua")
+	wdlable = Label(titleframe,text="Walking Dead :",bg="green")
 	wdlable.pack(fill=X,expand=1)
+	svlable = Label(titleframe,text="Silicon Valley",bg="green")
+	svlable.pack(fill=X,expand=1)
+	dvlable = Label(titleframe,text="Davinci's Deamons",bg="green")
+	dvlable.pack(fill=X,expand=1)
 
 	#populate current episode list
-	titlelabel = Label(currentframe,text="Current",bg="aqua")
+	titlelabel = Label(currentframe,text="Current",bg="green")
 	titlelabel.pack(fill=X,expand=1)
 	lab0 = Label(currentframe,text=current_episodes[0],bg="yellow")
 	lab0.pack(fill=X,expand=1)
@@ -166,9 +184,13 @@ if __name__ == '__main__':
 	lab4.pack(fill=X,expand=1)
 	lab5 = Label(currentframe,text=current_episodes[5],bg="yellow")
 	lab5.pack(fill=X,expand=1)
+	lab6 = Label(currentframe,text=current_episodes[6],bg="yellow")
+	lab6.pack(fill=X,expand=1)
+	lab7 = Label(currentframe,text=current_episodes[7],bg="yellow")
+	lab7.pack(fill=X,expand=1)
 
 	#populate latest episode list
-	latlabel = Label(latestframe,text="Latest",bg="aqua")
+	latlabel = Label(latestframe,text="Latest",bg="green")
 	latlabel.pack(fill=X,expand=1)
 	lat0 = Label(latestframe,text=latest_episodes[0],bg='orange')
 	lat0.pack(fill=X,expand=1)
@@ -182,8 +204,12 @@ if __name__ == '__main__':
 	lat4.pack(fill=X,expand=1)
 	lat5 = Label(latestframe,text=latest_episodes[5],bg='orange')
 	lat5.pack(fill=X,expand=1)
+	lat6 = Label(latestframe,text=latest_episodes[6],bg='orange')
+	lat6.pack(fill=X,expand=1)
+	lat7 = Label(latestframe,text=latest_episodes[7],bg='orange')
+	lat7.pack(fill=X,expand=1)
 
-	latest_list=[lat0,lat1,lat2,lat3,lat4,lat5]
+	latest_list=[lat0,lat1,lat2,lat3,lat4,lat5,lat6,lat7]
 
 	for i in range(no_of_series):
 		if current_episodes[i].strip() != latest_episodes[i].strip():
@@ -200,15 +226,18 @@ if __name__ == '__main__':
 	bu3.pack(fill=X,expand=1)
 	bu4 = Button(buframe,text="Atlantis +",command=lambda:write_latest_episodes(3))
 	bu4.pack(fill=X,expand=1)
-	bu5 = Button(buframe,text="himym +",command=lambda:write_latest_episodes(4))
+	bu5 = Button(buframe,text="GOT +",command=lambda:write_latest_episodes(4))
 	bu5.pack(fill=X,expand=1)
-	bu5 = Button(buframe,text="twd +",command=lambda:write_latest_episodes(5))
-	bu5.pack(fill=X,expand=1)
+	bu6 = Button(buframe,text="WD +",command=lambda:write_latest_episodes(5))
+	bu6.pack(fill=X,expand=1)
+	bu7 = Button(buframe,text="SV +",command=lambda:write_latest_episodes(6))
+	bu7.pack(fill=X,expand=1)
+	bu8 = Button(buframe,text="DV's D +",command=lambda:write_latest_episodes(7))
+	bu8.pack(fill=X,expand=1)
 
 	root.geometry("1000x229+300+300")  #Set starting window size
 	root.mainloop()        #starts event loop of the program
 	#root.destroy()
-
 
 
 
