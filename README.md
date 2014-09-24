@@ -1,4 +1,4 @@
-series_traker
+Series Traker
 =============
 Series tracker is a python application that trackes new episodes launche of your favourite series.
 Script tracks your progress thoriugh the season.
