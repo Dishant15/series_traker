@@ -4,6 +4,7 @@ from Tkinter import *
 import webbrowser as wb
 import json
 
+bu1 = None
 
 def get_page_code(page):
 	"""
@@ -66,15 +67,16 @@ def write_to_file():
 	jsonfile.write(json.dumps(data,indent=4))
 	jsonfile.close()
 
-def add_new_series(names, seriesdata):
+def add_new_series(names, seriesdata, mainwindow):
 	"""Open a New Form To get new series Data From a User"""
-	new_series = AddSeries(names, seriesdata)
+	new_series = AddSeries(names, seriesdata, mainwindow)
 
 class AddSeries(object):
 	"""Open Form where User can enter details for new series"""
-	def __init__(self, names, seriesdata):
+	def __init__(self, names, seriesdata, mainwindow):
 		self.names = names
 		self.data = seriesdata
+		self.main_window = mainwindow
 
 		self.form_window = Tk()
 		self.form_window.title("Add New Series")
@@ -100,8 +102,8 @@ class AddSeries(object):
 		self.submitbu = Button(self.firstframe, text="Add Series", command = self.submit )
 		self.submitbu.grid(row = 4, column = 1)
 
-		self.submitbu = Button(self.firstframe, text="Cancel", command = self.form_window.destroy )
-		self.submitbu.grid(row = 4, column = 0)
+		self.cancelbu = Button(self.firstframe, text="Cancel", command = self.form_window.destroy )
+		self.cancelbu.grid(row = 4, column = 0)
 
 		self.form_window.geometry("500x200")
 		self.form_window.mainloop()
@@ -110,19 +112,27 @@ class AddSeries(object):
 		pass
 
 	def submit(self):
+		"""Write User Input Data into json Files"""
+		global bu1
 		self.submit_validation()
 
+		new_series_name = self.ser_namein.get().strip()
+
 		series_name_list = self.names
-		series_name_list.append(self.ser_namein.get().strip())
+		series_name_list.append(new_series_name)
 		jsonfile = open('data/seriesname.json','w')
 		jsonfile.write(json.dumps(series_name_list,indent=4))
 		jsonfile.close()
 
 		seriesdata = self.data
-		seriesdata[self.ser_namein.get().strip()] = { 'current' : "New Series Added", 'url' : self.urlin.get().strip(), 'tourl' : self.tourlin.get().strip() }
+		seriesdata[new_series_name] = { 'current' : "New Series Added", 'url' : self.urlin.get().strip(), 'tourl' : self.tourlin.get().strip() }
 		jsonfile = open('data/seriesdata.json','w')
 		jsonfile.write(json.dumps(seriesdata,indent=4))
 		jsonfile.close()
+
+		i = len(series_name_list)
+		new_series = Series(i, new_series_name, seriesdata[new_series_name], self.main_window)
+		bu1.grid(row = i + 1, column = 2)
 
 		self.form_window.destroy()
 
@@ -202,6 +212,7 @@ class Series(object):
 			wb.open(self.tourl)
 
 if __name__ == '__main__':
+	global bu1
 	# Get all The names of series user is currently tracking
 	with open('data/seriesname.json') as data_file:
 		names = json.load(data_file)
@@ -222,7 +233,7 @@ if __name__ == '__main__':
 	#add Buttons to update all content
 	bu0 = Button(main_window.firstframe, text="Update all", command = lambda:update_all(series_list) )
 	bu0.grid(row=0, column=3)
-	bu1 = Button(main_window.firstframe, text="Add New Series", command = lambda:add_new_series(names, seriesdata) )
+	bu1 = Button(main_window.firstframe, text="Add New Series", command = lambda:add_new_series(names, seriesdata, main_window) )
 	bu1.grid(row = len(series_list)+1, column = 2)
 	# Start the application
 	main_window.startapp()
