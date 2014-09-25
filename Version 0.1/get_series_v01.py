@@ -66,6 +66,66 @@ def write_to_file():
 	jsonfile.write(json.dumps(data,indent=4))
 	jsonfile.close()
 
+def add_new_series(names, seriesdata):
+	"""Open a New Form To get new series Data From a User"""
+	new_series = AddSeries(names, seriesdata)
+
+class AddSeries(object):
+	"""Open Form where User can enter details for new series"""
+	def __init__(self, names, seriesdata):
+		self.names = names
+		self.data = seriesdata
+
+		self.form_window = Tk()
+		self.form_window.title("Add New Series")
+
+		self.firstframe = Frame(self.form_window)
+		self.firstframe.pack()
+
+		self.ser_namelab = Label(self.firstframe, text="Series Name", font=("Arial", 14), width=16)
+		self.ser_namelab.grid(row = 0, column = 0 )
+		self.ser_namein = Entry(self.firstframe, width = 24)
+		self.ser_namein.grid(row = 0, column = 1 )
+
+		self.urllab = Label(self.firstframe, text="Enter Fetch URL", font=("Arial", 14), width=16)
+		self.urllab.grid(row = 1, column = 0 )
+		self.urlin = Entry(self.firstframe, width = 24)
+		self.urlin.grid(row = 1, column = 1 )
+
+		self.tourllab = Label(self.firstframe, text="Enter Torrent URL", font=("Arial", 14), width=16)
+		self.tourllab.grid(row = 2, column = 0 )
+		self.tourlin = Entry(self.firstframe, width = 24)
+		self.tourlin.grid(row = 2, column = 1 )
+
+		self.submitbu = Button(self.firstframe, text="Add Series", command = self.submit )
+		self.submitbu.grid(row = 4, column = 1)
+
+		self.submitbu = Button(self.firstframe, text="Cancel", command = self.form_window.destroy )
+		self.submitbu.grid(row = 4, column = 0)
+
+		self.form_window.geometry("500x200")
+		self.form_window.mainloop()
+
+	def submit_validation(self):
+		pass
+
+	def submit(self):
+		self.submit_validation()
+
+		series_name_list = self.names
+		series_name_list.append(self.ser_namein.get().strip())
+		jsonfile = open('data/seriesname.json','w')
+		jsonfile.write(json.dumps(series_name_list,indent=4))
+		jsonfile.close()
+
+		seriesdata = self.data
+		seriesdata[self.ser_namein.get().strip()] = { 'current' : "New Series Added", 'url' : self.urlin.get().strip(), 'tourl' : self.tourlin.get().strip() }
+		jsonfile = open('data/seriesdata.json','w')
+		jsonfile.write(json.dumps(seriesdata,indent=4))
+		jsonfile.close()
+
+		self.form_window.destroy()
+
 class SeriesTraker(object):
 	"""Initialize tinker window"""
 
@@ -158,9 +218,12 @@ if __name__ == '__main__':
 	def update_all(series_list):
 		for series in series_list:
 			series.update()
+	# Extra Global app widgets
 	#add Buttons to update all content
-	bu0 = Button(main_window.firstframe,text="Update all",command = lambda:update_all(series_list) )
+	bu0 = Button(main_window.firstframe, text="Update all", command = lambda:update_all(series_list) )
 	bu0.grid(row=0, column=3)
+	bu1 = Button(main_window.firstframe, text="Add New Series", command = lambda:add_new_series(names, seriesdata) )
+	bu1.grid(row = len(series_list)+1, column = 2)
 	# Start the application
 	main_window.startapp()
 

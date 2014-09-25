@@ -8,5 +8,10 @@
         "current": "23 Unthinkable", 
         "url": "http://next-episode.net/arrow", 
         "tourl": "http://kickass.to/arrow-tv30715/"
+    }, 
+    "Game Of Thrones": {
+        "current": "10 The Children", 
+        "url": "http://next-episode.net/game-of-thrones", 
+        "tourl": "http://kickass.to/game-of-thrones-tv24493/"
     }
 }
