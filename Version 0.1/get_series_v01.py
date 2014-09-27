@@ -132,7 +132,7 @@ class AddSeries(object):
 
 		i = len(series_name_list)
 		new_series = Series(i, new_series_name, seriesdata[new_series_name], self.main_window)
-		bu1.grid(row = i + 1, column = 2)
+		bu1.grid(row = i + 1, column = 1, columnspan=2 )
 
 		self.form_window.destroy()
 
@@ -148,35 +148,35 @@ class SeriesTraker(object):
 		self.firstframe.pack()
 
 		#populate title frame with titles
-		self.titlelabel = Label(self.firstframe,text="Series Names",bg="green")
-		self.titlelabel.grid(row=0, column=0)
+		self.titlelabel = Label(self.firstframe,text="Series Names",bg="orange", borderwidth = 2 )
+		self.titlelabel.grid(row=0, column=0, sticky=W+E+N+S )
 
 		#populate current episode list
-		self.currenteptitle = Label(self.firstframe,text="Current",bg="green")
-		self.currenteptitle.grid(row=0, column=1)
+		self.currenteptitle = Label(self.firstframe,text="Current",bg="orange")
+		self.currenteptitle.grid(row=0, column=1, sticky=W+E+N+S )
 
 		#populate latest episode list
-		self.latesteptitle = Label(self.firstframe,text="Latest",bg="green")
-		self.latesteptitle.grid(row=0, column=2)
+		self.latesteptitle = Label(self.firstframe,text="Latest",bg="orange")
+		self.latesteptitle.grid(row=0, column=2, sticky=W+E+N+S )
 
 	def add_series_row(self, ser_obj):
 		"""takes an object of series class and creates a row for that series on main window"""
 		# set Label for new series
-		ser_obj.titlelab = Label( self.firstframe, text = ser_obj.name, bg = "green")
-		ser_obj.titlelab.grid( row = ser_obj.num, column = 0 )
+		ser_obj.titlelab = Label( self.firstframe, text = ser_obj.name, bg = "orange")
+		ser_obj.titlelab.grid( row = ser_obj.num, column = 0, sticky=W+E+N+S )
 		# set current episode label for new series
-		ser_obj.currentlab = Label( self.firstframe, text = ser_obj.current, bg = "green")
-		ser_obj.currentlab.grid( row = ser_obj.num, column = 1 )
+		ser_obj.currentlab = Label( self.firstframe, text = ser_obj.current, bg = "yellow")
+		ser_obj.currentlab.grid( row = ser_obj.num, column = 1, sticky=W+E+N+S )
 
 		if ser_obj.is_uptodate:
 			ser_obj.latestlab = Label( self.firstframe, text = ser_obj.latest, bg = "green")
-			ser_obj.latestlab.grid( row = ser_obj.num, column = 2 )
+			ser_obj.latestlab.grid( row = ser_obj.num, column = 2, sticky=W+E+N+S )
 		else:
 			ser_obj.latestlab = Label( self.firstframe, text = ser_obj.latest, bg = "red")
-			ser_obj.latestlab.grid( row = ser_obj.num, column = 2 )
+			ser_obj.latestlab.grid( row = ser_obj.num, column = 2, sticky=W+E+N+S )
 
 		ser_obj.but = Button( self.firstframe, text = "Update " + ser_obj.name, command = ser_obj.update )
-		ser_obj.but.grid( row = ser_obj.num, column = 3 )
+		ser_obj.but.grid( row = ser_obj.num, column = 3, sticky=W+E+N+S )
 
 	def startapp(self):
 		self.root.geometry("1000x300+300+300")  #Set starting window size
@@ -232,9 +232,9 @@ if __name__ == '__main__':
 	# Extra Global app widgets
 	#add Buttons to update all content
 	bu0 = Button(main_window.firstframe, text="Update all", command = lambda:update_all(series_list) )
-	bu0.grid(row=0, column=3)
+	bu0.grid(row=0, column=3, sticky=W+E+N+S )
 	bu1 = Button(main_window.firstframe, text="Add New Series", command = lambda:add_new_series(names, seriesdata, main_window) )
-	bu1.grid(row = len(series_list)+1, column = 2)
+	bu1.grid(row = len(series_list)+1, column = 1, columnspan=2 )
 	# Start the application
 	main_window.startapp()
 

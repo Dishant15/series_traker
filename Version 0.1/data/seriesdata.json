@@ -1,9 +1,4 @@
 {
-    "The Big Bang Theory": {
-        "current": "1, 2 The Locomotion Interruption (+1 more)", 
-        "url": "http://next-episode.net/the-big-bang-theory", 
-        "tourl": "http://kickass.to/the-big-bang-theory-tv8511/"
-    }, 
     "Atlantis": {
         "current": "13 Touched by the Gods: Part Two", 
         "url": "http://next-episode.net/atlantis-2013", 
@@ -14,14 +9,34 @@
         "url": "http://next-episode.net/marvels-agents-of-s.h.i.e.l.d.", 
         "tourl": "http://kickass.to/marvel-s-agents-of-s-h-i-e-l-d-tv32656/"
     }, 
-    "Arrow": {
-        "current": "23 Unthinkable", 
-        "url": "http://next-episode.net/arrow", 
-        "tourl": "http://kickass.to/arrow-tv30715/"
+    "The Big Bang Theory": {
+        "current": "1, 2 The Locomotion Interruption (+1 more)", 
+        "url": "http://next-episode.net/the-big-bang-theory", 
+        "tourl": "http://kickass.to/the-big-bang-theory-tv8511/"
     }, 
     "Game Of Thrones": {
         "current": "10 The Children", 
         "url": "http://next-episode.net/game-of-thrones", 
         "tourl": "http://kickass.to/game-of-thrones-tv24493/"
+    }, 
+    "Da Vinci's Deamons": {
+        "current": "10 The Sins of Daedalus", 
+        "url": "http://next-episode.net/da-vincis-demons", 
+        "tourl": "http://kickass.to/da-vinci-s-demons-tv32724/"
+    }, 
+    "Arrow": {
+        "current": "23 Unthinkable", 
+        "url": "http://next-episode.net/arrow", 
+        "tourl": "http://kickass.to/arrow-tv30715/"
+    }, 
+    "Walking Dead": {
+        "current": "New Series Added", 
+        "url": "http://next-episode.net/the-walking-dead", 
+        "tourl": "http://kickass.to/the-walking-dead-tv25056/"
+    }, 
+    "Silicon Vally": {
+        "current": "8 Optimal Tip-to-Tip Efficiency", 
+        "url": "http://next-episode.net/silicon-valley", 
+        "tourl": "http://kickass.to/silicon-valley-tv33759/"
     }
 }
