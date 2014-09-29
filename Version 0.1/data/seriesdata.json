@@ -19,6 +19,11 @@
         "url": "http://next-episode.net/game-of-thrones", 
         "tourl": "http://kickass.to/game-of-thrones-tv24493/"
     }, 
+    "Gotham": {
+        "current": "1 Pilot", 
+        "url": "http://next-episode.net/gotham", 
+        "tourl": "https://kickass.to/gotham-tv38049/"
+    }, 
     "Da Vinci's Deamons": {
         "current": "10 The Sins of Daedalus", 
         "url": "http://next-episode.net/da-vincis-demons", 
@@ -30,7 +35,7 @@
         "tourl": "http://kickass.to/arrow-tv30715/"
     }, 
     "Walking Dead": {
-        "current": "New Series Added", 
+        "current": "Special Inside The Walking Dead: Walker University", 
         "url": "http://next-episode.net/the-walking-dead", 
         "tourl": "http://kickass.to/the-walking-dead-tv25056/"
     }, 
@@ -38,5 +43,10 @@
         "current": "8 Optimal Tip-to-Tip Efficiency", 
         "url": "http://next-episode.net/silicon-valley", 
         "tourl": "http://kickass.to/silicon-valley-tv33759/"
+    }, 
+    "The Strain": {
+        "current": "12 Last Rites", 
+        "url": "http://next-episode.net/the-strain", 
+        "tourl": "https://kickass.to/the-strain-tv33229/"
     }
 }

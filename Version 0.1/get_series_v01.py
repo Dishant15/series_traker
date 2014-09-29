@@ -179,7 +179,8 @@ class SeriesTraker(object):
 		ser_obj.but.grid( row = ser_obj.num, column = 3, sticky=W+E+N+S )
 
 	def startapp(self):
-		self.root.geometry("1000x300+300+300")  #Set starting window size
+		self.root.wm_attributes('-fullscreen', 1)
+		#self.root.geometry("1000x300+300+300")  #Set starting window size
 		self.root.mainloop()        #starts event loop of the program
 
 class Series(object):
