@@ -1,26 +1,41 @@
 {
+    "Forever": {
+        "current": "21 The Night In Question", 
+        "url": "http://next-episode.net/forever-2014", 
+        "tourl": "https://kickass.so/forever-2014-tv41038/"
+    }, 
     "Atlantis": {
-        "current": "13 Touched by the Gods: Part Two", 
+        "current": "8 The Madness of Hercules", 
         "url": "http://next-episode.net/atlantis-2013", 
         "tourl": "http://kickass.to/atlantis-2013-tv36869/"
     }, 
     "Shield": {
-        "current": "2 Heavy is the Head", 
+        "current": "18 The Frenemy of My Enemy", 
         "url": "http://next-episode.net/marvels-agents-of-s.h.i.e.l.d.", 
         "tourl": "http://kickass.to/marvel-s-agents-of-s-h-i-e-l-d-tv32656/"
     }, 
     "The Big Bang Theory": {
-        "current": "3 The First Pitch Insufficiency", 
+        "current": "21 The Communication Deterioration", 
         "url": "http://next-episode.net/the-big-bang-theory", 
         "tourl": "http://kickass.to/the-big-bang-theory-tv8511/"
     }, 
+    "Flash": {
+        "current": "19 Who Is Harrison Wells?", 
+        "url": "http://next-episode.net/the-flash-2014", 
+        "tourl": "https://kickass.to/the-flash-2014-tv36939/"
+    }, 
+    "Agent Carter": {
+        "current": "8 Valediction", 
+        "url": "http://next-episode.net/marvels-agent-carter", 
+        "tourl": "https://kickass.so/marvel-s-agent-carter-tv38412/"
+    }, 
     "Game Of Thrones": {
-        "current": "10 The Children", 
+        "current": "2 The House of Black and White", 
         "url": "http://next-episode.net/game-of-thrones", 
         "tourl": "http://kickass.to/game-of-thrones-tv24493/"
     }, 
     "Gotham": {
-        "current": "2 Selina Kyle", 
+        "current": "13 Welcome Back&#44; Jim Gordon", 
         "url": "http://next-episode.net/gotham", 
         "tourl": "https://kickass.to/gotham-tv38049/"
     }, 
@@ -30,17 +45,17 @@
         "tourl": "http://kickass.to/da-vinci-s-demons-tv32724/"
     }, 
     "Arrow": {
-        "current": "23 Unthinkable", 
+        "current": "19 Broken Arrow", 
         "url": "http://next-episode.net/arrow", 
         "tourl": "http://kickass.to/arrow-tv30715/"
     }, 
     "Walking Dead": {
-        "current": "Special Inside The Walking Dead: Walker University", 
+        "current": "16 Conquer", 
         "url": "http://next-episode.net/the-walking-dead", 
         "tourl": "http://kickass.to/the-walking-dead-tv25056/"
     }, 
     "Silicon Vally": {
-        "current": "8 Optimal Tip-to-Tip Efficiency", 
+        "current": "2 Runaway Devaluation", 
         "url": "http://next-episode.net/silicon-valley", 
         "tourl": "http://kickass.to/silicon-valley-tv33759/"
     }, 
