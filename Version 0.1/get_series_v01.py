@@ -2,7 +2,9 @@ import urllib2
 import zlib
 from Tkinter import *
 import webbrowser as wb
-import json
+import json, os
+
+dirpath = os.path.dirname(__file__)
 
 bu1 = None
 
@@ -215,10 +217,10 @@ class Series(object):
 if __name__ == '__main__':
 	global bu1
 	# Get all The names of series user is currently tracking
-	with open('data/seriesname.json') as data_file:
+	with open(dirpath + '/data/seriesname.json') as data_file:
 		names = json.load(data_file)
 	# Get Whole data on those series that we currently have
-	with open('data/seriesdata.json') as data_file:
+	with open(dirpath + '/data/seriesdata.json') as data_file:
 		seriesdata = json.load(data_file)
 	# Make primary skeleton of the application
 	main_window = SeriesTraker()
