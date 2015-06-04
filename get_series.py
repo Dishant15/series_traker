@@ -59,13 +59,13 @@ def get_latest_episodes(url):
 def write_to_file():
 	"""TEST"""
 	data = ["Arrow", "Shield"]
-	jsonfile = open('data/seriesname.json','w')
+	jsonfile = open(dirpath + '/data/seriesname.json','w')
 	jsonfile.write(json.dumps(data,indent=4))
 	jsonfile.close()
 	data = {}
 	data['Arrow'] = { 'current' : "arrow 1", 'url' : 'http://next-episode.net/arrow', 'tourl' : 'http://kickass.to/arrow-tv30715/' }
 	data['Shield'] = { 'current' : "Shield 1", 'url' : 'http://next-episode.net/marvels-agents-of-s.h.i.e.l.d.', 'tourl' : 'http://kickass.to/marvel-s-agents-of-s-h-i-e-l-d-tv32656/' }
-	jsonfile = open('data/seriesdata.json','w')
+	jsonfile = open(dirpath + '/data/seriesdata.json','w')
 	jsonfile.write(json.dumps(data,indent=4))
 	jsonfile.close()
 
@@ -122,13 +122,13 @@ class AddSeries(object):
 
 		series_name_list = self.names
 		series_name_list.append(new_series_name)
-		jsonfile = open('data/seriesname.json','w')
+		jsonfile = open(dirpath + '/data/seriesname.json','w')
 		jsonfile.write(json.dumps(series_name_list,indent=4))
 		jsonfile.close()
 
 		seriesdata = self.data
 		seriesdata[new_series_name] = { 'current' : "New Series Added", 'url' : self.urlin.get().strip(), 'tourl' : self.tourlin.get().strip() }
-		jsonfile = open('data/seriesdata.json','w')
+		jsonfile = open(dirpath + '/data/seriesdata.json','w')
 		jsonfile.write(json.dumps(seriesdata,indent=4))
 		jsonfile.close()
 
@@ -180,6 +180,9 @@ class SeriesTraker(object):
 		ser_obj.but = Button( self.firstframe, text = "Update " + ser_obj.name, command = ser_obj.update )
 		ser_obj.but.grid( row = ser_obj.num, column = 3, sticky=W+E+N+S )
 
+		ser_obj.remove_but = Button( self.firstframe, text = "Remove " + ser_obj.name, command = ser_obj.remove )
+		ser_obj.remove_but.grid( row = ser_obj.num, column = 4, sticky=W+E+N+S )
+
 	def startapp(self):
 		#self.root.wm_attributes('-fullscreen', 1)
 		self.root.geometry("1000x900")  #Set starting window size
@@ -205,14 +208,25 @@ class Series(object):
 
 	def update(self):
 		if not self.is_uptodate:
-			with open('data/seriesdata.json') as data_file:
+			with open(dirpath + '/data/seriesdata.json') as data_file:
 				seriesdata = json.load(data_file)
 			seriesdata[self.name] = { 'current' : self.latest, 'url' : self.url, 'tourl' : self.tourl }
-			jsonfile = open('data/seriesdata.json','w')
+			jsonfile = open(dirpath + '/data/seriesdata.json','w')
 			jsonfile.write(json.dumps(seriesdata,indent=4))
 			jsonfile.close()
 			self.latestlab.config( bg = 'green' )
 			wb.open(self.tourl)
+
+	def remove(self):
+		with open(dirpath + '/data/seriesname.json') as data_file:
+			names = json.load(data_file)
+		names.remove(self.name)
+		jsonfile = open(dirpath + '/data/seriesname.json','w')
+		jsonfile.write(json.dumps(names,indent=4))
+		jsonfile.close()
+		self.titlelab.config( bg = 'white' )
+		self.currentlab.config( bg = 'white' )
+		self.latestlab.config( bg = 'white' )
 
 if __name__ == '__main__':
 	global bu1
@@ -242,11 +256,3 @@ if __name__ == '__main__':
 	main_window.startapp()
 
 	
-
-
-
-
-
-
-
-
